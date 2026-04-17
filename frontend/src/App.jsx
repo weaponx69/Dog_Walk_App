@@ -7,22 +7,29 @@ function App() {
   return (
     <Router>
       <div className="app-container">
-        <header style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <header className="main-header">
           <h1><span style={{ color: 'var(--accent-color)' }}>Dog</span>Go</h1>
           <nav>
-            <Link to="/owner" className="btn" style={{ marginRight: '1rem', background: 'transparent', border: '1px solid var(--accent-color)' }}>I am an Owner</Link>
+            <Link to="/owner" className="btn btn-outline" style={{ marginRight: '1rem' }}>I am an Owner</Link>
             <Link to="/walker" className="btn">I am a Walker</Link>
           </nav>
         </header>
         
         <Routes>
           <Route path="/" element={
-            <div className="glass-panel animate-fade-in" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-              <h2>Welcome to DogGo</h2>
-              <p style={{ marginBottom: '2rem', color: 'var(--background-light)' }}>The premium on-demand dog walking platform.</p>
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                <Link to="/owner" className="btn">Request a Walk</Link>
-                <Link to="/walker" className="btn" style={{ background: 'var(--secondary-color)' }}>Start Earning</Link>
+            <div className="hero-section animate-fade-in">
+              <div className="hero-content">
+                <h2 style={{ fontSize: '3rem', marginBottom: '1rem', lineHeight: 1.2 }}>Premium Dog Walking on Demand.</h2>
+                <p style={{ fontSize: '1.2rem', marginBottom: '2rem', color: 'var(--background-light)', lineHeight: 1.6 }}>
+                  Connect with trusted, local dog walkers instantly. Give your furry best friend the walk they deserve while you focus on your day.
+                </p>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <Link to="/owner" className="btn btn-large">Request a Walk</Link>
+                  <Link to="/walker" className="btn btn-large btn-outline">Start Earning</Link>
+                </div>
+              </div>
+              <div className="hero-image-container">
+                <img src="/hero.png" alt="Happy dog being walked" className="hero-image" />
               </div>
             </div>
           } />

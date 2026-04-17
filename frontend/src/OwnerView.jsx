@@ -74,8 +74,14 @@ export default function OwnerView() {
         {step === 'arriving' && (
           <div>
             <div className="status-badge" style={{ background: 'var(--primary-color)' }}>Walker Arriving</div>
-            <h3>Alex is on the way!</h3>
-            <p style={{ color: 'var(--background-light)', marginBottom: '1.5rem' }}>Estimated arrival: 4 mins</p>
+            
+            <div className="walker-card">
+              <img src="/walker.png" alt="Alex the walker" className="walker-avatar" />
+              <div>
+                <h3 style={{ marginBottom: '0.2rem' }}>Alex is on the way!</h3>
+                <p style={{ color: 'var(--background-light)', margin: 0 }}>★ 4.9 (120 walks) • Estimated arrival: 4 mins</p>
+              </div>
+            </div>
             
             <div style={{ background: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem' }}>
               <h4>Chat with Alex</h4>
