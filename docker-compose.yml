@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgis/postgis:15-3.3
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=dog_walk
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6380:6379"
+
+  backend:
+    build: ./backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8085:8000"
+    environment:
+      - DATABASE_URL=postgis://postgres:postgres@db:5432/dog_walk
+      - REDIS_URL=redis://redis:6379/0
+      - DEBUG=1
+    depends_on:
+      - db
+      - redis
+
+  frontend:
+    build: ./frontend
+    command: npm run dev -- --host
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5185:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8085
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
