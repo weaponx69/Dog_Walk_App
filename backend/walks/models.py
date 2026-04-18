@@ -8,6 +8,9 @@ class Dog(models.Model):
     size = models.CharField(max_length=20, choices=(('SMALL', 'Small'), ('MEDIUM', 'Medium'), ('LARGE', 'Large')))
     notes = models.TextField(blank=True)
 
+    def __str__(self):
+        return f"{self.name} ({self.owner.username})"
+
 class WalkRequest(models.Model):
     STATUS_CHOICES = (
         ('SEARCHING', 'Searching'),
@@ -26,3 +29,6 @@ class WalkRequest(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     payment_intent_id = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return f"WalkRequest #{self.id} by {self.owner.username} - {self.get_status_display()}"

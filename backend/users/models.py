@@ -8,6 +8,9 @@ class User(AbstractUser):
     )
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='OWNER')
 
+    def __str__(self):
+        return f"{self.username} ({self.get_role_display()})"
+
 class WalkerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='walker_profile')
     max_dogs = models.IntegerField(default=1)
@@ -15,6 +18,12 @@ class WalkerProfile(models.Model):
     current_location = models.PointField(null=True, blank=True)
     is_online = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f"Walker: {self.user.username}"
+
 class OwnerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='owner_profile')
     home_location = models.PointField(null=True, blank=True)
+
+    def __str__(self):
+        return f"Owner: {self.user.username}"
