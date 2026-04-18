@@ -107,7 +107,10 @@ DATABASES = {
     )
 }
 # Make sure to use postgis engine if using postgres
-if 'postgis' in os.environ.get('DATABASE_URL', ''):
+from urllib.parse import urlparse
+db_url = os.environ.get('DATABASE_URL', '')
+parsed_url = urlparse(db_url)
+if parsed_url.scheme in ('postgres', 'postgresql', 'postgis'):
     DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
 
