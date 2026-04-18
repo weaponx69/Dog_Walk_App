@@ -7,7 +7,6 @@ from .serializers import DogSerializer, WalkRequestSerializer
 import stripe
 
 stripe.api_key = getattr(settings, 'STRIPE_SECRET_KEY', 'sk_test_mock')
-from .serializers import DogSerializer, WalkRequestSerializer
 
 class DogViewSet(viewsets.ModelViewSet):
     queryset = Dog.objects.all()
